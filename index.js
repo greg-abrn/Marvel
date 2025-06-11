@@ -1,4 +1,5 @@
 const express = require("express");
+const axios = require("axios");
 const cors = require("cors");
 
 require("dotenv").config();
@@ -6,16 +7,13 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGODB_URI);
 
-const cloudinary = require("cloudinary").v2;
-cloudinary.config({
-  cloud_name: "dblidb6s7",
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+axios.get(
+  "https://lereacteur-marvel-api.herokuapp.com/comics?apiKey=process.env.MARVEL_API_KEY"
+);
 
 app.get("/", (req, res) => {
   try {
